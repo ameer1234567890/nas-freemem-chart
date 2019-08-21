@@ -12,7 +12,7 @@
       $.getJSON('https://api.thingspeak.com/channels/' + channel + '/feed.json?api_key=' + apikey, function(data) {
         var jsonData = '{"cols":[{"label":"Time","type":"string"},{"label":"Free Memory","type":"number"}],"rows": [\n';
         for (i in data.feeds) {
-          jsonData += '{"c":[{"v":"' + data.feeds[i].created_at + '"},{"v":' + data.feeds[i].field1 + '}]}';
+          jsonData += '{"c":[{"v":"' + new Date(data.feeds[i].created_at).toLocaleString('en-GB') + '"},{"v":' + data.feeds[i].field1 + '}]}';
           if (i == data.feeds.length - 1) {
             jsonData += '\n'
           } else {
@@ -26,7 +26,7 @@
           vAxis: {
             viewWindow: {
               min: 0,
-              max: 50000
+              max: 100000
             }
           }
         };
